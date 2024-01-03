@@ -1327,6 +1327,288 @@ mod root {
                     }
 
                     #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
+                    pub struct ListView {}
+
+                    impl ListView {
+                        #[allow(clippy::too_many_arguments)]
+                        pub fn create(builder: &mut ::planus::Builder) -> ::planus::Offset<Self> {
+                            let mut table_writer =
+                                ::planus::table_writer::TableWriter::<4, 0>::new(builder);
+
+                            table_writer.finish_calculating();
+
+                            table_writer.finish()
+                        }
+                    }
+
+                    impl ::planus::WriteAs<::planus::Offset<ListView>> for ListView {
+                        type Prepared = ::planus::Offset<Self>;
+
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::planus::Offset<ListView> {
+                            ::planus::WriteAsOffset::prepare(self, builder)
+                        }
+                    }
+
+                    impl ::planus::WriteAsOptional<::planus::Offset<ListView>> for ListView {
+                        type Prepared = ::planus::Offset<Self>;
+
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::core::option::Option<::planus::Offset<ListView>>
+                        {
+                            ::core::option::Option::Some(::planus::WriteAsOffset::prepare(
+                                self, builder,
+                            ))
+                        }
+                    }
+
+                    impl ::planus::WriteAsOffset<ListView> for ListView {
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::planus::Offset<ListView> {
+                            ListView::create(builder)
+                        }
+                    }
+
+                    #[derive(Copy, Clone)]
+                    pub struct ListViewRef<'a>(::planus::table_reader::Table<'a>);
+
+                    impl<'a> ListViewRef<'a> {}
+
+                    impl<'a> ::core::fmt::Debug for ListViewRef<'a> {
+                        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                            let mut f = f.debug_struct("ListViewRef");
+
+                            f.finish()
+                        }
+                    }
+
+                    impl<'a> ::core::convert::TryFrom<ListViewRef<'a>> for ListView {
+                        type Error = ::planus::Error;
+
+                        fn try_from(_value: ListViewRef<'a>) -> ::planus::Result<Self> {
+                            ::core::result::Result::Ok(Self {})
+                        }
+                    }
+
+                    impl<'a> ::planus::TableRead<'a> for ListViewRef<'a> {
+                        fn from_buffer(
+                            buffer: ::planus::SliceWithStartOffset<'a>,
+                            offset: usize,
+                        ) -> ::core::result::Result<Self, ::planus::errors::ErrorKind>
+                        {
+                            ::core::result::Result::Ok(Self(
+                                ::planus::table_reader::Table::from_buffer(buffer, offset)?,
+                            ))
+                        }
+                    }
+
+                    impl<'a> ::planus::VectorReadInner<'a> for ListViewRef<'a> {
+                        type Error = ::planus::Error;
+                        const STRIDE: usize = 4;
+
+                        unsafe fn from_buffer(
+                            buffer: ::planus::SliceWithStartOffset<'a>,
+                            offset: usize,
+                        ) -> ::planus::Result<Self> {
+                            ::planus::TableRead::from_buffer(buffer, offset).map_err(|error_kind| {
+                                error_kind.with_error_location(
+                                    "[ListViewRef]",
+                                    "get",
+                                    buffer.offset_from_start,
+                                )
+                            })
+                        }
+                    }
+
+                    impl ::planus::VectorWrite<::planus::Offset<ListView>> for ListView {
+                        type Value = ::planus::Offset<ListView>;
+                        const STRIDE: usize = 4;
+                        fn prepare(&self, builder: &mut ::planus::Builder) -> Self::Value {
+                            ::planus::WriteAs::prepare(self, builder)
+                        }
+
+                        #[inline]
+                        unsafe fn write_values(
+                            values: &[::planus::Offset<ListView>],
+                            bytes: *mut ::core::mem::MaybeUninit<u8>,
+                            buffer_position: u32,
+                        ) {
+                            let bytes = bytes as *mut [::core::mem::MaybeUninit<u8>; 4];
+                            for (i, v) in ::core::iter::Iterator::enumerate(values.iter()) {
+                                ::planus::WriteAsPrimitive::write(
+                                    v,
+                                    ::planus::Cursor::new(&mut *bytes.add(i)),
+                                    buffer_position - (Self::STRIDE * i) as u32,
+                                );
+                            }
+                        }
+                    }
+
+                    impl<'a> ::planus::ReadAsRoot<'a> for ListViewRef<'a> {
+                        fn read_as_root(slice: &'a [u8]) -> ::planus::Result<Self> {
+                            ::planus::TableRead::from_buffer(
+                                ::planus::SliceWithStartOffset {
+                                    buffer: slice,
+                                    offset_from_start: 0,
+                                },
+                                0,
+                            )
+                            .map_err(|error_kind| {
+                                error_kind.with_error_location("[ListViewRef]", "read_as_root", 0)
+                            })
+                        }
+                    }
+
+                    #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
+                    pub struct LargeListView {}
+
+                    impl LargeListView {
+                        #[allow(clippy::too_many_arguments)]
+                        pub fn create(builder: &mut ::planus::Builder) -> ::planus::Offset<Self> {
+                            let mut table_writer =
+                                ::planus::table_writer::TableWriter::<4, 0>::new(builder);
+
+                            table_writer.finish_calculating();
+
+                            table_writer.finish()
+                        }
+                    }
+
+                    impl ::planus::WriteAs<::planus::Offset<LargeListView>> for LargeListView {
+                        type Prepared = ::planus::Offset<Self>;
+
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::planus::Offset<LargeListView> {
+                            ::planus::WriteAsOffset::prepare(self, builder)
+                        }
+                    }
+
+                    impl ::planus::WriteAsOptional<::planus::Offset<LargeListView>> for LargeListView {
+                        type Prepared = ::planus::Offset<Self>;
+
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::core::option::Option<::planus::Offset<LargeListView>>
+                        {
+                            ::core::option::Option::Some(::planus::WriteAsOffset::prepare(
+                                self, builder,
+                            ))
+                        }
+                    }
+
+                    impl ::planus::WriteAsOffset<LargeListView> for LargeListView {
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::planus::Offset<LargeListView> {
+                            LargeListView::create(builder)
+                        }
+                    }
+
+                    #[derive(Copy, Clone)]
+                    pub struct LargeListViewRef<'a>(::planus::table_reader::Table<'a>);
+
+                    impl<'a> LargeListViewRef<'a> {}
+
+                    impl<'a> ::core::fmt::Debug for LargeListViewRef<'a> {
+                        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                            let mut f = f.debug_struct("LargeListViewRef");
+
+                            f.finish()
+                        }
+                    }
+
+                    impl<'a> ::core::convert::TryFrom<LargeListViewRef<'a>> for LargeListView {
+                        type Error = ::planus::Error;
+
+                        fn try_from(_value: LargeListViewRef<'a>) -> ::planus::Result<Self> {
+                            ::core::result::Result::Ok(Self {})
+                        }
+                    }
+
+                    impl<'a> ::planus::TableRead<'a> for LargeListViewRef<'a> {
+                        fn from_buffer(
+                            buffer: ::planus::SliceWithStartOffset<'a>,
+                            offset: usize,
+                        ) -> ::core::result::Result<Self, ::planus::errors::ErrorKind>
+                        {
+                            ::core::result::Result::Ok(Self(
+                                ::planus::table_reader::Table::from_buffer(buffer, offset)?,
+                            ))
+                        }
+                    }
+
+                    impl<'a> ::planus::VectorReadInner<'a> for LargeListViewRef<'a> {
+                        type Error = ::planus::Error;
+                        const STRIDE: usize = 4;
+
+                        unsafe fn from_buffer(
+                            buffer: ::planus::SliceWithStartOffset<'a>,
+                            offset: usize,
+                        ) -> ::planus::Result<Self> {
+                            ::planus::TableRead::from_buffer(buffer, offset).map_err(|error_kind| {
+                                error_kind.with_error_location(
+                                    "[LargeListViewRef]",
+                                    "get",
+                                    buffer.offset_from_start,
+                                )
+                            })
+                        }
+                    }
+
+                    impl ::planus::VectorWrite<::planus::Offset<LargeListView>> for LargeListView {
+                        type Value = ::planus::Offset<LargeListView>;
+                        const STRIDE: usize = 4;
+                        fn prepare(&self, builder: &mut ::planus::Builder) -> Self::Value {
+                            ::planus::WriteAs::prepare(self, builder)
+                        }
+
+                        #[inline]
+                        unsafe fn write_values(
+                            values: &[::planus::Offset<LargeListView>],
+                            bytes: *mut ::core::mem::MaybeUninit<u8>,
+                            buffer_position: u32,
+                        ) {
+                            let bytes = bytes as *mut [::core::mem::MaybeUninit<u8>; 4];
+                            for (i, v) in ::core::iter::Iterator::enumerate(values.iter()) {
+                                ::planus::WriteAsPrimitive::write(
+                                    v,
+                                    ::planus::Cursor::new(&mut *bytes.add(i)),
+                                    buffer_position - (Self::STRIDE * i) as u32,
+                                );
+                            }
+                        }
+                    }
+
+                    impl<'a> ::planus::ReadAsRoot<'a> for LargeListViewRef<'a> {
+                        fn read_as_root(slice: &'a [u8]) -> ::planus::Result<Self> {
+                            ::planus::TableRead::from_buffer(
+                                ::planus::SliceWithStartOffset {
+                                    buffer: slice,
+                                    offset_from_start: 0,
+                                },
+                                0,
+                            )
+                            .map_err(|error_kind| {
+                                error_kind.with_error_location(
+                                    "[LargeListViewRef]",
+                                    "read_as_root",
+                                    0,
+                                )
+                            })
+                        }
+                    }
+
+                    #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
                     pub struct FixedSizeList {
                         pub list_size: i32,
                     }
@@ -3078,6 +3360,284 @@ mod root {
                     }
 
                     #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
+                    pub struct Utf8View {}
+
+                    impl Utf8View {
+                        #[allow(clippy::too_many_arguments)]
+                        pub fn create(builder: &mut ::planus::Builder) -> ::planus::Offset<Self> {
+                            let mut table_writer =
+                                ::planus::table_writer::TableWriter::<4, 0>::new(builder);
+
+                            table_writer.finish_calculating();
+
+                            table_writer.finish()
+                        }
+                    }
+
+                    impl ::planus::WriteAs<::planus::Offset<Utf8View>> for Utf8View {
+                        type Prepared = ::planus::Offset<Self>;
+
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::planus::Offset<Utf8View> {
+                            ::planus::WriteAsOffset::prepare(self, builder)
+                        }
+                    }
+
+                    impl ::planus::WriteAsOptional<::planus::Offset<Utf8View>> for Utf8View {
+                        type Prepared = ::planus::Offset<Self>;
+
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::core::option::Option<::planus::Offset<Utf8View>>
+                        {
+                            ::core::option::Option::Some(::planus::WriteAsOffset::prepare(
+                                self, builder,
+                            ))
+                        }
+                    }
+
+                    impl ::planus::WriteAsOffset<Utf8View> for Utf8View {
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::planus::Offset<Utf8View> {
+                            Utf8View::create(builder)
+                        }
+                    }
+
+                    #[derive(Copy, Clone)]
+                    pub struct Utf8ViewRef<'a>(::planus::table_reader::Table<'a>);
+
+                    impl<'a> Utf8ViewRef<'a> {}
+
+                    impl<'a> ::core::fmt::Debug for Utf8ViewRef<'a> {
+                        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                            let mut f = f.debug_struct("Utf8ViewRef");
+
+                            f.finish()
+                        }
+                    }
+
+                    impl<'a> ::core::convert::TryFrom<Utf8ViewRef<'a>> for Utf8View {
+                        type Error = ::planus::Error;
+
+                        fn try_from(_value: Utf8ViewRef<'a>) -> ::planus::Result<Self> {
+                            ::core::result::Result::Ok(Self {})
+                        }
+                    }
+
+                    impl<'a> ::planus::TableRead<'a> for Utf8ViewRef<'a> {
+                        fn from_buffer(
+                            buffer: ::planus::SliceWithStartOffset<'a>,
+                            offset: usize,
+                        ) -> ::core::result::Result<Self, ::planus::errors::ErrorKind>
+                        {
+                            ::core::result::Result::Ok(Self(
+                                ::planus::table_reader::Table::from_buffer(buffer, offset)?,
+                            ))
+                        }
+                    }
+
+                    impl<'a> ::planus::VectorReadInner<'a> for Utf8ViewRef<'a> {
+                        type Error = ::planus::Error;
+                        const STRIDE: usize = 4;
+
+                        unsafe fn from_buffer(
+                            buffer: ::planus::SliceWithStartOffset<'a>,
+                            offset: usize,
+                        ) -> ::planus::Result<Self> {
+                            ::planus::TableRead::from_buffer(buffer, offset).map_err(|error_kind| {
+                                error_kind.with_error_location(
+                                    "[Utf8ViewRef]",
+                                    "get",
+                                    buffer.offset_from_start,
+                                )
+                            })
+                        }
+                    }
+
+                    impl ::planus::VectorWrite<::planus::Offset<Utf8View>> for Utf8View {
+                        type Value = ::planus::Offset<Utf8View>;
+                        const STRIDE: usize = 4;
+                        fn prepare(&self, builder: &mut ::planus::Builder) -> Self::Value {
+                            ::planus::WriteAs::prepare(self, builder)
+                        }
+
+                        #[inline]
+                        unsafe fn write_values(
+                            values: &[::planus::Offset<Utf8View>],
+                            bytes: *mut ::core::mem::MaybeUninit<u8>,
+                            buffer_position: u32,
+                        ) {
+                            let bytes = bytes as *mut [::core::mem::MaybeUninit<u8>; 4];
+                            for (i, v) in ::core::iter::Iterator::enumerate(values.iter()) {
+                                ::planus::WriteAsPrimitive::write(
+                                    v,
+                                    ::planus::Cursor::new(&mut *bytes.add(i)),
+                                    buffer_position - (Self::STRIDE * i) as u32,
+                                );
+                            }
+                        }
+                    }
+
+                    impl<'a> ::planus::ReadAsRoot<'a> for Utf8ViewRef<'a> {
+                        fn read_as_root(slice: &'a [u8]) -> ::planus::Result<Self> {
+                            ::planus::TableRead::from_buffer(
+                                ::planus::SliceWithStartOffset {
+                                    buffer: slice,
+                                    offset_from_start: 0,
+                                },
+                                0,
+                            )
+                            .map_err(|error_kind| {
+                                error_kind.with_error_location("[Utf8ViewRef]", "read_as_root", 0)
+                            })
+                        }
+                    }
+
+                    #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
+                    pub struct BinaryView {}
+
+                    impl BinaryView {
+                        #[allow(clippy::too_many_arguments)]
+                        pub fn create(builder: &mut ::planus::Builder) -> ::planus::Offset<Self> {
+                            let mut table_writer =
+                                ::planus::table_writer::TableWriter::<4, 0>::new(builder);
+
+                            table_writer.finish_calculating();
+
+                            table_writer.finish()
+                        }
+                    }
+
+                    impl ::planus::WriteAs<::planus::Offset<BinaryView>> for BinaryView {
+                        type Prepared = ::planus::Offset<Self>;
+
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::planus::Offset<BinaryView> {
+                            ::planus::WriteAsOffset::prepare(self, builder)
+                        }
+                    }
+
+                    impl ::planus::WriteAsOptional<::planus::Offset<BinaryView>> for BinaryView {
+                        type Prepared = ::planus::Offset<Self>;
+
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::core::option::Option<::planus::Offset<BinaryView>>
+                        {
+                            ::core::option::Option::Some(::planus::WriteAsOffset::prepare(
+                                self, builder,
+                            ))
+                        }
+                    }
+
+                    impl ::planus::WriteAsOffset<BinaryView> for BinaryView {
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::planus::Offset<BinaryView> {
+                            BinaryView::create(builder)
+                        }
+                    }
+
+                    #[derive(Copy, Clone)]
+                    pub struct BinaryViewRef<'a>(::planus::table_reader::Table<'a>);
+
+                    impl<'a> BinaryViewRef<'a> {}
+
+                    impl<'a> ::core::fmt::Debug for BinaryViewRef<'a> {
+                        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                            let mut f = f.debug_struct("BinaryViewRef");
+
+                            f.finish()
+                        }
+                    }
+
+                    impl<'a> ::core::convert::TryFrom<BinaryViewRef<'a>> for BinaryView {
+                        type Error = ::planus::Error;
+
+                        fn try_from(_value: BinaryViewRef<'a>) -> ::planus::Result<Self> {
+                            ::core::result::Result::Ok(Self {})
+                        }
+                    }
+
+                    impl<'a> ::planus::TableRead<'a> for BinaryViewRef<'a> {
+                        fn from_buffer(
+                            buffer: ::planus::SliceWithStartOffset<'a>,
+                            offset: usize,
+                        ) -> ::core::result::Result<Self, ::planus::errors::ErrorKind>
+                        {
+                            ::core::result::Result::Ok(Self(
+                                ::planus::table_reader::Table::from_buffer(buffer, offset)?,
+                            ))
+                        }
+                    }
+
+                    impl<'a> ::planus::VectorReadInner<'a> for BinaryViewRef<'a> {
+                        type Error = ::planus::Error;
+                        const STRIDE: usize = 4;
+
+                        unsafe fn from_buffer(
+                            buffer: ::planus::SliceWithStartOffset<'a>,
+                            offset: usize,
+                        ) -> ::planus::Result<Self> {
+                            ::planus::TableRead::from_buffer(buffer, offset).map_err(|error_kind| {
+                                error_kind.with_error_location(
+                                    "[BinaryViewRef]",
+                                    "get",
+                                    buffer.offset_from_start,
+                                )
+                            })
+                        }
+                    }
+
+                    impl ::planus::VectorWrite<::planus::Offset<BinaryView>> for BinaryView {
+                        type Value = ::planus::Offset<BinaryView>;
+                        const STRIDE: usize = 4;
+                        fn prepare(&self, builder: &mut ::planus::Builder) -> Self::Value {
+                            ::planus::WriteAs::prepare(self, builder)
+                        }
+
+                        #[inline]
+                        unsafe fn write_values(
+                            values: &[::planus::Offset<BinaryView>],
+                            bytes: *mut ::core::mem::MaybeUninit<u8>,
+                            buffer_position: u32,
+                        ) {
+                            let bytes = bytes as *mut [::core::mem::MaybeUninit<u8>; 4];
+                            for (i, v) in ::core::iter::Iterator::enumerate(values.iter()) {
+                                ::planus::WriteAsPrimitive::write(
+                                    v,
+                                    ::planus::Cursor::new(&mut *bytes.add(i)),
+                                    buffer_position - (Self::STRIDE * i) as u32,
+                                );
+                            }
+                        }
+                    }
+
+                    impl<'a> ::planus::ReadAsRoot<'a> for BinaryViewRef<'a> {
+                        fn read_as_root(slice: &'a [u8]) -> ::planus::Result<Self> {
+                            ::planus::TableRead::from_buffer(
+                                ::planus::SliceWithStartOffset {
+                                    buffer: slice,
+                                    offset_from_start: 0,
+                                },
+                                0,
+                            )
+                            .map_err(|error_kind| {
+                                error_kind.with_error_location("[BinaryViewRef]", "read_as_root", 0)
+                            })
+                        }
+                    }
+
+                    #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
                     pub struct FixedSizeBinary {
                         pub byte_width: i32,
                     }
@@ -3387,6 +3947,149 @@ mod root {
                             )
                             .map_err(|error_kind| {
                                 error_kind.with_error_location("[BoolRef]", "read_as_root", 0)
+                            })
+                        }
+                    }
+
+                    #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
+                    pub struct RunEndEncoded {}
+
+                    impl RunEndEncoded {
+                        #[allow(clippy::too_many_arguments)]
+                        pub fn create(builder: &mut ::planus::Builder) -> ::planus::Offset<Self> {
+                            let mut table_writer =
+                                ::planus::table_writer::TableWriter::<4, 0>::new(builder);
+
+                            table_writer.finish_calculating();
+
+                            table_writer.finish()
+                        }
+                    }
+
+                    impl ::planus::WriteAs<::planus::Offset<RunEndEncoded>> for RunEndEncoded {
+                        type Prepared = ::planus::Offset<Self>;
+
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::planus::Offset<RunEndEncoded> {
+                            ::planus::WriteAsOffset::prepare(self, builder)
+                        }
+                    }
+
+                    impl ::planus::WriteAsOptional<::planus::Offset<RunEndEncoded>> for RunEndEncoded {
+                        type Prepared = ::planus::Offset<Self>;
+
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::core::option::Option<::planus::Offset<RunEndEncoded>>
+                        {
+                            ::core::option::Option::Some(::planus::WriteAsOffset::prepare(
+                                self, builder,
+                            ))
+                        }
+                    }
+
+                    impl ::planus::WriteAsOffset<RunEndEncoded> for RunEndEncoded {
+                        fn prepare(
+                            &self,
+                            builder: &mut ::planus::Builder,
+                        ) -> ::planus::Offset<RunEndEncoded> {
+                            RunEndEncoded::create(builder)
+                        }
+                    }
+
+                    #[derive(Copy, Clone)]
+                    pub struct RunEndEncodedRef<'a>(::planus::table_reader::Table<'a>);
+
+                    impl<'a> RunEndEncodedRef<'a> {}
+
+                    impl<'a> ::core::fmt::Debug for RunEndEncodedRef<'a> {
+                        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                            let mut f = f.debug_struct("RunEndEncodedRef");
+
+                            f.finish()
+                        }
+                    }
+
+                    impl<'a> ::core::convert::TryFrom<RunEndEncodedRef<'a>> for RunEndEncoded {
+                        type Error = ::planus::Error;
+
+                        fn try_from(_value: RunEndEncodedRef<'a>) -> ::planus::Result<Self> {
+                            ::core::result::Result::Ok(Self {})
+                        }
+                    }
+
+                    impl<'a> ::planus::TableRead<'a> for RunEndEncodedRef<'a> {
+                        fn from_buffer(
+                            buffer: ::planus::SliceWithStartOffset<'a>,
+                            offset: usize,
+                        ) -> ::core::result::Result<Self, ::planus::errors::ErrorKind>
+                        {
+                            ::core::result::Result::Ok(Self(
+                                ::planus::table_reader::Table::from_buffer(buffer, offset)?,
+                            ))
+                        }
+                    }
+
+                    impl<'a> ::planus::VectorReadInner<'a> for RunEndEncodedRef<'a> {
+                        type Error = ::planus::Error;
+                        const STRIDE: usize = 4;
+
+                        unsafe fn from_buffer(
+                            buffer: ::planus::SliceWithStartOffset<'a>,
+                            offset: usize,
+                        ) -> ::planus::Result<Self> {
+                            ::planus::TableRead::from_buffer(buffer, offset).map_err(|error_kind| {
+                                error_kind.with_error_location(
+                                    "[RunEndEncodedRef]",
+                                    "get",
+                                    buffer.offset_from_start,
+                                )
+                            })
+                        }
+                    }
+
+                    impl ::planus::VectorWrite<::planus::Offset<RunEndEncoded>> for RunEndEncoded {
+                        type Value = ::planus::Offset<RunEndEncoded>;
+                        const STRIDE: usize = 4;
+                        fn prepare(&self, builder: &mut ::planus::Builder) -> Self::Value {
+                            ::planus::WriteAs::prepare(self, builder)
+                        }
+
+                        #[inline]
+                        unsafe fn write_values(
+                            values: &[::planus::Offset<RunEndEncoded>],
+                            bytes: *mut ::core::mem::MaybeUninit<u8>,
+                            buffer_position: u32,
+                        ) {
+                            let bytes = bytes as *mut [::core::mem::MaybeUninit<u8>; 4];
+                            for (i, v) in ::core::iter::Iterator::enumerate(values.iter()) {
+                                ::planus::WriteAsPrimitive::write(
+                                    v,
+                                    ::planus::Cursor::new(&mut *bytes.add(i)),
+                                    buffer_position - (Self::STRIDE * i) as u32,
+                                );
+                            }
+                        }
+                    }
+
+                    impl<'a> ::planus::ReadAsRoot<'a> for RunEndEncodedRef<'a> {
+                        fn read_as_root(slice: &'a [u8]) -> ::planus::Result<Self> {
+                            ::planus::TableRead::from_buffer(
+                                ::planus::SliceWithStartOffset {
+                                    buffer: slice,
+                                    offset_from_start: 0,
+                                },
+                                0,
+                            )
+                            .map_err(|error_kind| {
+                                error_kind.with_error_location(
+                                    "[RunEndEncodedRef]",
+                                    "read_as_root",
+                                    0,
+                                )
                             })
                         }
                     }
@@ -4955,6 +5658,11 @@ mod root {
                         LargeBinary(::planus::alloc::boxed::Box<self::LargeBinary>),
                         LargeUtf8(::planus::alloc::boxed::Box<self::LargeUtf8>),
                         LargeList(::planus::alloc::boxed::Box<self::LargeList>),
+                        RunEndEncoded(::planus::alloc::boxed::Box<self::RunEndEncoded>),
+                        BinaryView(::planus::alloc::boxed::Box<self::BinaryView>),
+                        Utf8View(::planus::alloc::boxed::Box<self::Utf8View>),
+                        ListView(::planus::alloc::boxed::Box<self::ListView>),
+                        LargeListView(::planus::alloc::boxed::Box<self::LargeListView>),
                     }
 
                     impl Type {
@@ -5104,6 +5812,41 @@ mod root {
                         ) -> ::planus::UnionOffset<Self> {
                             ::planus::UnionOffset::new(21, value.prepare(builder).downcast())
                         }
+
+                        pub fn create_run_end_encoded(
+                            builder: &mut ::planus::Builder,
+                            value: impl ::planus::WriteAsOffset<self::RunEndEncoded>,
+                        ) -> ::planus::UnionOffset<Self> {
+                            ::planus::UnionOffset::new(22, value.prepare(builder).downcast())
+                        }
+
+                        pub fn create_binary_view(
+                            builder: &mut ::planus::Builder,
+                            value: impl ::planus::WriteAsOffset<self::BinaryView>,
+                        ) -> ::planus::UnionOffset<Self> {
+                            ::planus::UnionOffset::new(23, value.prepare(builder).downcast())
+                        }
+
+                        pub fn create_utf8_view(
+                            builder: &mut ::planus::Builder,
+                            value: impl ::planus::WriteAsOffset<self::Utf8View>,
+                        ) -> ::planus::UnionOffset<Self> {
+                            ::planus::UnionOffset::new(24, value.prepare(builder).downcast())
+                        }
+
+                        pub fn create_list_view(
+                            builder: &mut ::planus::Builder,
+                            value: impl ::planus::WriteAsOffset<self::ListView>,
+                        ) -> ::planus::UnionOffset<Self> {
+                            ::planus::UnionOffset::new(25, value.prepare(builder).downcast())
+                        }
+
+                        pub fn create_large_list_view(
+                            builder: &mut ::planus::Builder,
+                            value: impl ::planus::WriteAsOffset<self::LargeListView>,
+                        ) -> ::planus::UnionOffset<Self> {
+                            ::planus::UnionOffset::new(26, value.prepare(builder).downcast())
+                        }
                     }
 
                     impl ::planus::WriteAsUnion<Type> for Type {
@@ -5141,6 +5884,15 @@ mod root {
                                 }
                                 Self::LargeUtf8(value) => Self::create_large_utf8(builder, value),
                                 Self::LargeList(value) => Self::create_large_list(builder, value),
+                                Self::RunEndEncoded(value) => {
+                                    Self::create_run_end_encoded(builder, value)
+                                }
+                                Self::BinaryView(value) => Self::create_binary_view(builder, value),
+                                Self::Utf8View(value) => Self::create_utf8_view(builder, value),
+                                Self::ListView(value) => Self::create_list_view(builder, value),
+                                Self::LargeListView(value) => {
+                                    Self::create_large_list_view(builder, value)
+                                }
                             }
                         }
                     }
@@ -5180,6 +5932,11 @@ mod root {
                         LargeBinary(self::LargeBinaryRef<'a>),
                         LargeUtf8(self::LargeUtf8Ref<'a>),
                         LargeList(self::LargeListRef<'a>),
+                        RunEndEncoded(self::RunEndEncodedRef<'a>),
+                        BinaryView(self::BinaryViewRef<'a>),
+                        Utf8View(self::Utf8ViewRef<'a>),
+                        ListView(self::ListViewRef<'a>),
+                        LargeListView(self::LargeListViewRef<'a>),
                     }
 
                     impl<'a> ::core::convert::TryFrom<TypeRef<'a>> for Type {
@@ -5308,6 +6065,36 @@ mod root {
                                         ::core::convert::TryFrom::try_from(value)?,
                                     ))
                                 }
+
+                                TypeRef::RunEndEncoded(value) => {
+                                    Type::RunEndEncoded(::planus::alloc::boxed::Box::new(
+                                        ::core::convert::TryFrom::try_from(value)?,
+                                    ))
+                                }
+
+                                TypeRef::BinaryView(value) => {
+                                    Type::BinaryView(::planus::alloc::boxed::Box::new(
+                                        ::core::convert::TryFrom::try_from(value)?,
+                                    ))
+                                }
+
+                                TypeRef::Utf8View(value) => {
+                                    Type::Utf8View(::planus::alloc::boxed::Box::new(
+                                        ::core::convert::TryFrom::try_from(value)?,
+                                    ))
+                                }
+
+                                TypeRef::ListView(value) => {
+                                    Type::ListView(::planus::alloc::boxed::Box::new(
+                                        ::core::convert::TryFrom::try_from(value)?,
+                                    ))
+                                }
+
+                                TypeRef::LargeListView(value) => {
+                                    Type::LargeListView(::planus::alloc::boxed::Box::new(
+                                        ::core::convert::TryFrom::try_from(value)?,
+                                    ))
+                                }
                             })
                         }
                     }
@@ -5381,6 +6168,21 @@ mod root {
                                     ::planus::TableRead::from_buffer(buffer, field_offset)?,
                                 )),
                                 21 => ::core::result::Result::Ok(Self::LargeList(
+                                    ::planus::TableRead::from_buffer(buffer, field_offset)?,
+                                )),
+                                22 => ::core::result::Result::Ok(Self::RunEndEncoded(
+                                    ::planus::TableRead::from_buffer(buffer, field_offset)?,
+                                )),
+                                23 => ::core::result::Result::Ok(Self::BinaryView(
+                                    ::planus::TableRead::from_buffer(buffer, field_offset)?,
+                                )),
+                                24 => ::core::result::Result::Ok(Self::Utf8View(
+                                    ::planus::TableRead::from_buffer(buffer, field_offset)?,
+                                )),
+                                25 => ::core::result::Result::Ok(Self::ListView(
+                                    ::planus::TableRead::from_buffer(buffer, field_offset)?,
+                                )),
+                                26 => ::core::result::Result::Ok(Self::LargeListView(
                                     ::planus::TableRead::from_buffer(buffer, field_offset)?,
                                 )),
                                 _ => ::core::result::Result::Err(
@@ -7563,6 +8365,8 @@ mod root {
                         pub compression: ::core::option::Option<
                             ::planus::alloc::boxed::Box<self::BodyCompression>,
                         >,
+                        pub variadic_buffer_counts:
+                            ::core::option::Option<::planus::alloc::vec::Vec<i64>>,
                     }
 
                     impl RecordBatch {
@@ -7575,6 +8379,9 @@ mod root {
                             compression: impl ::planus::WriteAsOptional<
                                 ::planus::Offset<self::BodyCompression>,
                             >,
+                            variadic_buffer_counts: impl ::planus::WriteAsOptional<
+                                ::planus::Offset<[i64]>,
+                            >,
                         ) -> ::planus::Offset<Self> {
                             let prepared_length = length.prepare(builder, &0);
 
@@ -7584,8 +8391,11 @@ mod root {
 
                             let prepared_compression = compression.prepare(builder);
 
+                            let prepared_variadic_buffer_counts =
+                                variadic_buffer_counts.prepare(builder);
+
                             let mut table_writer =
-                                ::planus::table_writer::TableWriter::<10, 20>::new(builder);
+                                ::planus::table_writer::TableWriter::<12, 24>::new(builder);
 
                             if prepared_length.is_some() {
                                 table_writer.calculate_size::<i64>(2);
@@ -7600,6 +8410,9 @@ mod root {
                             if prepared_compression.is_some() {
                                 table_writer
                                     .calculate_size::<::planus::Offset<self::BodyCompression>>(8);
+                            }
+                            if prepared_variadic_buffer_counts.is_some() {
+                                table_writer.calculate_size::<::planus::Offset<[i64]>>(10);
                             }
 
                             table_writer.finish_calculating();
@@ -7623,6 +8436,13 @@ mod root {
                                     prepared_compression
                                 {
                                     table_writer.write::<_, _, 4>(3, &prepared_compression);
+                                }
+                                if let ::core::option::Option::Some(
+                                    prepared_variadic_buffer_counts,
+                                ) = prepared_variadic_buffer_counts
+                                {
+                                    table_writer
+                                        .write::<_, _, 4>(4, &prepared_variadic_buffer_counts);
                                 }
                             }
 
@@ -7666,6 +8486,7 @@ mod root {
                                 &self.nodes,
                                 &self.buffers,
                                 &self.compression,
+                                &self.variadic_buffer_counts,
                             )
                         }
                     }
@@ -7702,6 +8523,13 @@ mod root {
                         {
                             self.0.access(3, "RecordBatch", "compression")
                         }
+
+                        pub fn variadic_buffer_counts(
+                            &self,
+                        ) -> ::planus::Result<::core::option::Option<::planus::Vector<'a, i64>>>
+                        {
+                            self.0.access(4, "RecordBatch", "variadic_buffer_counts")
+                        }
                     }
 
                     impl<'a> ::core::fmt::Debug for RecordBatchRef<'a> {
@@ -7720,6 +8548,11 @@ mod root {
                                 self.compression().transpose()
                             {
                                 f.field("compression", &compression);
+                            }
+                            if let ::core::option::Option::Some(variadic_buffer_counts) =
+                                self.variadic_buffer_counts().transpose()
+                            {
+                                f.field("variadic_buffer_counts", &variadic_buffer_counts);
                             }
                             f.finish()
                         }
@@ -7750,6 +8583,14 @@ mod root {
                                     ::core::option::Option::Some(::planus::alloc::boxed::Box::new(
                                         ::core::convert::TryInto::try_into(compression)?,
                                     ))
+                                } else {
+                                    ::core::option::Option::None
+                                },
+                                variadic_buffer_counts: if let ::core::option::Option::Some(
+                                    variadic_buffer_counts,
+                                ) = value.variadic_buffer_counts()?
+                                {
+                                    ::core::option::Option::Some(variadic_buffer_counts.to_vec()?)
                                 } else {
                                     ::core::option::Option::None
                                 },
